@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: AdoptMe API - Users Module
+  version: 1.0.0
+  description: |
+    Documentación del módulo **Users**.
+    Endpoints implementados en `routes/users.router.js`.
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/users:
+    get:
+      summary: Listar usuarios
+      tags: [Users]
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+  /api/users/{uid}:
+    get:
+      summary: Obtener usuario por ID
+      tags: [Users]
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  payload:
+                    $ref: '#/components/schemas/User'
+        '404':
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  error:
+                    type: string
+                    example: User not found
+    put:
+      summary: Actualizar un usuario
+      tags: [Users]
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: Usuario actualizado
+        '404':
+          description: Usuario no encontrado
+    delete:
+      summary: Eliminar un usuario
+      tags: [Users]
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuario eliminado
+        '404':
+          description: Usuario no encontrado
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 64c2d6b4f2c1a34f2f7e3abc
+        first_name:
+          type: string
+          example: Maria
+        last_name:
+          type: string
+          example: Sepulveda
+        email:
+          type: string
+          example: maria@example.com
+        role:
+          type: string
+          example: user
+        pets:
+          type: array
+          items:
+            type: string
+    UserUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        role:
+          type: string
