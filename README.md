@@ -1,7 +1,5 @@
 # AdoptMe API - Entrega Final
 
-Este repositorio contiene las mejoras solicitadas para la **Entrega Final**:
-
 - ✅ Documentación **Swagger** del módulo **Users** (`/docs/users`)
 - ✅ **Tests funcionales** para todos los endpoints de `adoption.router.js`
 - ✅ **Dockerfile** para construir imagen del proyecto
@@ -27,6 +25,7 @@ npm test
 ```
 
 Cubre:
+
 - `GET /api/adoptions` (lista)
 - `GET /api/adoptions/:aid` (detalle y 404)
 - `POST /api/adoptions/:uid/:pid` (éxito, 404s, 400 ya adoptado)
@@ -34,6 +33,7 @@ Cubre:
 ## 📚 Swagger (Users)
 
 Una vez corriendo la app:
+
 - Visita: **http://localhost:8080/docs/users**
 
 La especificación está en `src/docs/users.yaml`.
@@ -72,6 +72,7 @@ docker push camilaseal13/adoptme:latest
 **DockerHub:** https://hub.docker.com/r/camilaseal13/adoptme
 
 ## ⚡ Comandos rápidos (Docker)
+
 ```bash
 docker build -t camilaseal13/adoptme:1.0.0 .
 docker tag camilaseal13/adoptme:1.0.0 camilaseal13/adoptme:latest
@@ -89,26 +90,33 @@ docker run -e MONGO_URI="mongodb://host.docker.internal:27017/adoptme" -p 8080:8
 - Swagger se monta en `/docs/users` y usa `src/docs/users.yaml`.
 - Los tests usan `mongodb-memory-server` para aislar los datos.
 
-
 ## Swagger (Users)
-La documentación Swagger del módulo **Users** está disponible en la app. 
+
+La documentación Swagger del módulo **Users** está disponible en la app.
+
 - Esquema: `src/docs/users.yaml`
 - Acceso (ejemplo): visita `http://localhost:8080/docs` o la ruta configurada en `src/app.js` para Swagger UI.
 
 ## Variables de entorno
+
 Incluye un archivo `.env` basado en `.env.example`:
+
 ```bash
 MONGO_URI=mongodb://host.docker.internal:27017/adoptme
 PORT=8080
 ```
 
 ## Docker rápido
+
 Construir y ejecutar:
+
 ```bash
 npm run docker:build
 npm run docker:run
 ```
+
 O directamente:
+
 ```bash
 docker build -t camilaseal13/adoptme:1.0.0 .
 docker run -e MONGO_URI="mongodb://host.docker.internal:27017/adoptme" -p 8080:8080 camilaseal13/adoptme:latest
